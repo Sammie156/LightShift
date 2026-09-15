@@ -4,7 +4,7 @@ from PIL import Image
 
 import numpy as np
 
-DEPTH_PATH = Path("data/output/person_test_01.npy")
+DEPTH_PATH = Path("data/output/cat_01_depth.npy")
 
 depth = np.load(DEPTH_PATH)
 depth_min = depth.min()
@@ -33,9 +33,9 @@ ny /= magnitude
 nz /= magnitude
 
 normals = np.stack([nx, ny, nz], axis=-1)
-np.save("data/output/person_test_normal.npy", normals)
+np.save("data/output/cat_01_normal.npy", normals)
 
 normal_image = ((normals + 1) * 0.5 * 255).clip(0, 255).astype(np.uint8)
-Image.fromarray(normal_image).save("data/output/person_test_normal.png")
+Image.fromarray(normal_image).save("data/output/test_cat_normal.png")
 
 print("\n Saved Normal Map")

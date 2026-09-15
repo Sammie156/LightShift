@@ -7,7 +7,7 @@ import numpy as np
 
 # defining the paths
 INPUT_PATH = "data/input/person_test_01.jpg"
-OUTPUT_PATH = "data/output/person_test_depth.png"
+OUTPUT_PATH = "data/output/test_cat_depth.png"
 
 # importing the image
 image = Image.open(INPUT_PATH).convert("RGB")
@@ -45,4 +45,4 @@ depth_image = result["depth"]
 depth_image.save(OUTPUT_PATH)
 print("Saved depth map to: ", OUTPUT_PATH)
 
-np.save("data/output/person_test_01.npy", depth_array)
+np.save("data/output/cat_01_depth.npy", depth_array)
