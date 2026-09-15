@@ -7,7 +7,7 @@ import numpy as np
 
 # defining the paths
 INPUT_PATH = "data/input/cat_01.jpg"
-OUTPUT_PATH = "data/output/test_cat_depth.png"
+OUTPUT_PATH = "data/output/test_cat_depth_v2.png"
 
 # importing the image
 image = Image.open(INPUT_PATH).convert("RGB")
