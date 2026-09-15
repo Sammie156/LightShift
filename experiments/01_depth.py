@@ -21,7 +21,7 @@ print("loading depth model...")
 
 depth_estimator = pipeline(
     "depth-estimation",
-    model="depth-anything/Depth-Anything-V2-Small-hf"
+    model="LiheYoung/depth-anything-small-hf"
 )
 
 print("Model loaded")
