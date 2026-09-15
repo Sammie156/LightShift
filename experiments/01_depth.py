@@ -6,8 +6,8 @@ from transformers import pipeline
 import numpy as np
 
 # defining the paths
-INPUT_PATH = "data/input/cat_01.jpg"
-OUTPUT_PATH = "data/output/test_cat_depth_v2.png"
+INPUT_PATH = "data/input/person_test_01.jpg"
+OUTPUT_PATH = "data/output/person_test_depth.png"
 
 # importing the image
 image = Image.open(INPUT_PATH).convert("RGB")
@@ -21,7 +21,7 @@ print("loading depth model...")
 
 depth_estimator = pipeline(
     "depth-estimation",
-    model="LiheYoung/depth-anything-small-hf"
+    model="depth-anything/Depth-Anything-V2-Small-hf"
 )
 
 print("Model loaded")
@@ -45,4 +45,4 @@ depth_image = result["depth"]
 depth_image.save(OUTPUT_PATH)
 print("Saved depth map to: ", OUTPUT_PATH)
 
-np.save("data/output/cat_01_depth.npy", depth_array)
+np.save("data/output/person_test_01.npy", depth_array)

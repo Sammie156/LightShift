@@ -3,10 +3,10 @@ from PIL import Image
 
 import numpy as np
 
-normals = np.load("data/output/cat_01_normal.npy")
+normals = np.load("data/output/person_test_normal.npy")
 
-light = np.array([0.0, 0.0, 0.0], dtype=np.float32) # light position
-light_color = np.array([1.0, 0.15, 0.1], dtype=np.float32) # light color
+light = np.array([1.5, 0.0, 0.0], dtype=np.float32) # light position
+light_color = np.array([1.0, 0.15, 0.7], dtype=np.float32) # light color
 
 
 h, w, _ = normals.shape
@@ -15,7 +15,7 @@ y, x = np.mgrid[0:h, 0:w]
 x = (x / (w - 1)) * 2.0 - 1.0
 y = (y / (h - 1)) * 2.0 - 1.0
 
-depth = np.load("data/output/cat_01_depth.npy")
+depth = np.load("data/output/person_test_01.npy")
 z = depth
 
 z_min = z.min()
@@ -84,10 +84,10 @@ print(np.percentile(
 brightness_image = (
     brightness * 255
 ).clip(0, 255).astype(np.uint8)
-Image.fromarray(brightness_image).save("data/output/test_cat_brightness.png")
+Image.fromarray(brightness_image).save("data/output/test_person_brightness.png")
 
 original = np.array(
-    Image.open("data/input/cat_01.jpg").convert("RGB"),
+    Image.open("data/input/person_test_01.jpg").convert("RGB"),
     dtype=np.float32
 ) / 255.0
 
@@ -96,6 +96,6 @@ relit = original * illumination
 relit_image = (
     relit * 255
 ).clip(0, 255).astype(np.uint8)
-Image.fromarray(relit_image).save("data/output/test_cat_relit.png")
+Image.fromarray(relit_image).save("data/output/test_person_relit.png")
 
 print("\nSaved relit image")
