@@ -5,8 +5,9 @@ import numpy as np
 
 normals = np.load("data/output/cat_01_normal.npy")
 
-light = np.array([-1.5, 0.0, 1.0], dtype=np.float32) # light position
-light_color = np.array([1.0, 1.0, 1.0], dtype=np.float32) # light color
+light = np.array([0.0, 0.0, 0.0], dtype=np.float32) # light position
+light_color = np.array([1.0, 0.15, 0.1], dtype=np.float32) # light color
+
 
 h, w, _ = normals.shape
 y, x = np.mgrid[0:h, 0:w]
@@ -59,6 +60,20 @@ brightness = (
 
 brightness = np.maximum(brightness, 0.0)
 
+ambient = 0.2
+
+ambient_color = np.array(
+    [1.0, 1.0, 1.0],
+    dtype=np.float32
+)
+
+direct = brightness[..., None] * light_color
+
+illumination = (
+    ambient * ambient_color
+    + (1.0 - ambient) * direct
+)
+
 print("\nBrightness percentiles:")
 print(np.percentile(
     brightness,
@@ -76,11 +91,8 @@ original = np.array(
     dtype=np.float32
 ) / 255.0
 
-relit = (
-    original *
-    brightness[..., None] *
-    light_color
-)
+relit = original * illumination
+
 relit_image = (
     relit * 255
 ).clip(0, 255).astype(np.uint8)
